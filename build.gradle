@@ -1,0 +1,17 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main
+    zipExample
+}
+
+task zipExample(type: Jar) {
+    from sourceSets.main.output
+    from sourceSets.zipExample.output
+}
