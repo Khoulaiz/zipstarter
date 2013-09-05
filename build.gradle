@@ -41,18 +41,23 @@ project(':warExample') {
         compile('org.springframework:spring-web:3.1.1.RELEASE')
         compile project(':zipStarter')
     }
-    archiveName = 'warExample.war'
-    //    into('/') {
-    //        from sourceSets.zipStarter.output
-    //    }
-    //    into('WEB-INF/classes') {
-    //        from output
-    //    }
-    manifest {
-        attributes 'Main-Class': 'boot.ZipStarter'
-        attributes 'ZipStarter-Class-Path': 'WEB-INF/classes WEB-INF/lib'
-        attributes 'ZipStarter-Main-Class': 'com.sahlbach.zipstarter.war.HelloWebWorld'
+    task mywar(type: War) {
+        archiveName = 'warExample.war'
+        into('/') {
+            from project(':zipStarter').sourceSets.main.output
+        }
+//        into('WEB-INF/lib') {
+//            from configurations.runtime.files()
+//        }
+        manifest {
+            attributes 'Main-Class': 'boot.ZipStarter'
+            attributes 'ZipStarter-Class-Path': 'WEB-INF/classes WEB-INF/lib'
+            attributes 'ZipStarter-Main-Class': 'com.sahlbach.zipstarter.war.HelloWebWorld'
+        }
     }
-
+    war {
+        actions = []
+        dependsOn mywar
+    }
 }
 
