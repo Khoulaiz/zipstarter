@@ -1,17 +1,58 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
+version = '1.0'
 
-repositories {
-    mavenCentral()
+subprojects {
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+    apply plugin: 'java'
+
+    repositories {
+        mavenCentral()
+    }
 }
 
-sourceSets {
-    main
-    zipExample
+project(':zipExample') {
+    dependencies {
+        compile project(':zipStarter')
+    }
+    task myjar(type: Jar) {
+        into('/') {
+            from project(':zipStarter').sourceSets.main.output
+        }
+        into('classes') {
+            from sourceSets.main.output
+        }
+        destinationDir = file("$buildDir/libs")
+        archiveName = 'zipExample.zip'
+        manifest {
+            attributes 'Main-Class': 'boot.ZipStarter'
+            attributes 'ZipStarter-Class-Path': 'classes'
+            attributes 'ZipStarter-Main-Class': 'com.sahlbach.zipstarter.zip.HelloWorld'
+        }
+    }
+    jar {
+        actions = []
+        dependsOn myjar
+    }
 }
 
-task zipExample(type: Jar) {
-    from sourceSets.main.output
-    from sourceSets.zipExample.output
+project(':warExample') {
+    apply plugin: 'jetty'
+    dependencies {
+        compile('org.springframework:spring-web:3.1.1.RELEASE')
+        compile project(':zipStarter')
+    }
+    archiveName = 'warExample.war'
+    //    into('/') {
+    //        from sourceSets.zipStarter.output
+    //    }
+    //    into('WEB-INF/classes') {
+    //        from output
+    //    }
+    manifest {
+        attributes 'Main-Class': 'boot.ZipStarter'
+        attributes 'ZipStarter-Class-Path': 'WEB-INF/classes WEB-INF/lib'
+        attributes 'ZipStarter-Main-Class': 'com.sahlbach.zipstarter.war.HelloWebWorld'
+    }
+
 }
+
