@@ -1,16 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ace
-  Date: 9/5/13
-  Time: 3:55 PM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title></title>
+    <title>Index</title>
   </head>
   <body>
-
+  <a href="/hello">Hello Web World Service</a>
   </body>
 </html>

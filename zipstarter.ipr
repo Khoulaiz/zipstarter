@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactManager">
+    <artifact type="exploded-war" name="warExample:war exploded">
+      <output-path>$PROJECT_DIR$/out/artifacts/warExample_war_exploded</output-path>
+      <root id="root">
+        <element id="javaee-facet-resources" facet="warExample/web/Web" />
+        <element id="directory" name="WEB-INF">
+          <element id="directory" name="classes">
+            <element id="module-output" name="warExample" />
+          </element>
+        </element>
+      </root>
+    </artifact>
+  </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
     <resourceExtensions>
@@ -248,7 +261,9 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/zipstarter.iml" filepath="$PROJECT_DIR$/zipstarter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/warExample/warExample.iml" filepath="$PROJECT_DIR$/warExample/warExample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zipExample/zipExample.iml" filepath="$PROJECT_DIR$/zipExample/zipExample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zipStarter/zipStarter.iml" filepath="$PROJECT_DIR$/zipStarter/zipStarter.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">

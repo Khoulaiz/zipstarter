@@ -1,12 +1,5 @@
 package com.sahlbach.zipstarter.war;
 
-/**
- * Copyright by Volkswagen AG
- *
- * @author Andreas Sahlbach
- *         Date: 9/5/13
- *         Time: 6:28 PM
- */
 public class HelloWorldBean {
     private String outputText;
 
