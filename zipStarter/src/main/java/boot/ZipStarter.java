@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.*;
 import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
 import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
@@ -35,12 +36,29 @@ public class ZipStarter extends ClassLoader {
         final String mainClassKey = "ZipStarter-Main-Class";
         final String classPathKey = "ZipStarter-Class-Path";
 
+        ZipStarter zs = new ZipStarter();
+
+        // call boot.zip.Handler.register(ClassLoader zipStarter)
+        Class<?> clazz = ZipStarter.class.getClassLoader().loadClass("boot.zip.Handler");
+        Class[] argTypes = new Class[] {ZipStarter.class};
+        Method method = clazz.getDeclaredMethod("registerHandler", argTypes);
+        method.invoke(null, (Object) zs);
+
+        String zipFilePath = ZipStarter.class.getResource("/boot").getFile();
+        zipFilePath = zipFilePath.substring(0, zipFilePath.lastIndexOf("!"));
+        zipFilePath = zipFilePath.substring("file:".length());
+        File zipFile = new File(zipFilePath);
+
         String mainClass = System.getProperty(mainClassKey);
         String classPath = System.getProperty(classPathKey);
         Manifest mf = null;
         if (mainClass == null) {
             try {
-                mf = new Manifest(ZipStarter.class.getResourceAsStream("/META-INF/MANIFEST.MF"));
+                mf = getManifestFromZip(zipFilePath);
+                if(mf == null) {
+                    System.err.println("Can't find /META-INF/MANIFEST.MF in archive");
+                    System.exit(-1);
+                }
                 mainClass = mf.getMainAttributes().getValue(mainClassKey);
                 if (mainClass == null)
                     throw new IOException("There's no valid '" + mainClassKey + "' key!");
@@ -52,8 +70,13 @@ public class ZipStarter extends ClassLoader {
         }
         if (classPath == null) {
             try {
-                if(mf == null)
-                    mf = new Manifest(ZipStarter.class.getResourceAsStream("/META-INF/MANIFEST.MF"));
+                if(mf == null) {
+                    mf = getManifestFromZip(zipFilePath);
+                    if(mf == null) {
+                        System.err.println("Can't find /META-INF/MANIFEST.MF in archive");
+                        System.exit(-1);
+                    }
+                }
                 classPath = mf.getMainAttributes().getValue(classPathKey);
                 if(classPath == null) {
                     System.err.println("There is no 'ZipStarter-Class-Path' Parameter. Neither as system property (java -jar xy.zip -DZipStarter-Class-Path=**) nor as element "
@@ -72,19 +95,7 @@ public class ZipStarter extends ClassLoader {
             }
         }
 
-        ZipStarter zs = new ZipStarter();
-
-        // call boot.zip.Handler.register(ClassLoader zipStarter)
-        Class<?> clazz = ZipStarter.class.getClassLoader().loadClass("boot.zip.Handler");
-        Class[] argTypes = new Class[] {ZipStarter.class};
-        Method method = clazz.getDeclaredMethod("registerHandler", argTypes);
-        method.invoke(null, (Object) zs);
-
-        String zipFilePath = ZipStarter.class.getResource("/boot").getFile();
-        zipFilePath = zipFilePath.substring(0, zipFilePath.lastIndexOf("!"));
-        zipFilePath = zipFilePath.substring("file:".length());
-
-        File zipFile = new File(zipFilePath);
+        // build up classpath
         zs.init(zipFile, classPath);
 
         // call the zip-main class of this zip
@@ -92,6 +103,19 @@ public class ZipStarter extends ClassLoader {
         argTypes = new Class[] {String[].class};
         method = clazz.getDeclaredMethod("main", argTypes);
         method.invoke(null, (Object) args);
+    }
+
+    /**
+     * reads a manifest entry from an zip archive
+     * NOTE: don't use JarInputSteam.getManifest() it assumes that the manifest is the
+     * first entry in the zip. this is not part of the spec, but the jar tool enforces it
+     * @param zipFilePath filepath of the archive
+     * @return manifest or null if not found
+     * @throws IOException
+     */
+    private static Manifest getManifestFromZip(String zipFilePath) throws IOException {
+            JarFile jar = new JarFile(zipFilePath);
+            return jar.getManifest();
     }
 
     public ZipStarter () {

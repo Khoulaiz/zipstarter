@@ -5,6 +5,6 @@
     <title>Index</title>
   </head>
   <body>
-  <a href="/hello">Hello Web World Service</a>
+  <a href="/warExample/service/hello">Hello Web World Service</a>
   </body>
 </html>

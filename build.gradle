@@ -16,6 +16,11 @@ subprojects {
     repositories {
         mavenCentral()
     }
+    idea {
+        module {
+            downloadSources = true
+        }
+    }
 }
 
 project(':zipExample') {
@@ -36,11 +41,15 @@ project(':zipExample') {
             attributes 'ZipStarter-Class-Path': 'classes'
             attributes 'ZipStarter-Main-Class': 'com.sahlbach.zipstarter.zip.HelloWorld'
         }
+        doLast {
+            println "Try this: java -jar zipExample/build/libs/zipExample.zip"
+        }
     }
     jar {
         actions = []
         dependsOn myjar
     }
+
 }
 
 project(':warExample') {
@@ -55,21 +64,21 @@ project(':warExample') {
     configurations {
         all*.exclude group: "commons-logging", module: "commons-logging"
     }
-//    task mywar(type: War) {
     war {
-        archiveName = 'warExample.war'
-        into('/') {
-            from project(':zipStarter').sourceSets.main.output
-        }
         manifest {
             attributes 'Main-Class': 'boot.ZipStarter'
             attributes 'ZipStarter-Class-Path': 'WEB-INF/classes WEB-INF/lib'
             attributes 'ZipStarter-Main-Class': 'com.sahlbach.zipstarter.war.HelloWebWorld'
         }
+        archiveName = 'warExample.war'
+        into('/') {
+            from project(':zipStarter').sourceSets.main.output
+        }
+        doLast {
+            println "Try this: java -jar warExample/build/libs/warExample.war"
+            println "Try gradle jettyRun and access http://localhost:8080/warExample/service/hello"
+        }
     }
-//    war {
-//        actions = []
-//        dependsOn mywar
-//    }
+
 }
 

@@ -8,6 +8,23 @@
         <element id="directory" name="WEB-INF">
           <element id="directory" name="classes">
             <element id="module-output" name="warExample" />
+            <element id="module-output" name="zipStarter" />
+          </element>
+          <element id="directory" name="lib">
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.springframework/spring-webmvc/3.1.4.RELEASE/jar/e2151da3f3acf9213bb81a6d04592489dadbe755/spring-webmvc-3.1.4.RELEASE.jar" />
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-26/filestore/ch.qos.logback/logback-classic/1.0.13/jar/6b56ec752b42ccfa1415c0361fb54b1ed7ca3db6/logback-classic-1.0.13.jar" />
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.springframework/spring-asm/3.1.4.RELEASE/jar/a60440760f350b80ff612e9f49a41c3ef26935e3/spring-asm-3.1.4.RELEASE.jar" />
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.springframework/spring-core/3.1.4.RELEASE/jar/6c9c2b5cc405b437d4089c51a10f7581f980497b/spring-core-3.1.4.RELEASE.jar" />
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.springframework/spring-beans/3.1.4.RELEASE/jar/ce0173be2202cb7a7a9162463fd6c2907aa558c2/spring-beans-3.1.4.RELEASE.jar" />
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.springframework/spring-expression/3.1.4.RELEASE/jar/452515fc1fc013f05f3271fa7c95a43b671e4ffa/spring-expression-3.1.4.RELEASE.jar" />
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-26/filestore/aopalliance/aopalliance/1.0/jar/235ba8b489512805ac13a8f9ea77a1ca5ebe3e8/aopalliance-1.0.jar" />
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.springframework/spring-aop/3.1.4.RELEASE/jar/987dce710d76973e6f4f96a05463086afdf489d3/spring-aop-3.1.4.RELEASE.jar" />
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.springframework/spring-context/3.1.4.RELEASE/jar/ea5a227269a74dfd0d840ca91e647bc5212072b8/spring-context-3.1.4.RELEASE.jar" />
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.springframework/spring-context-support/3.1.4.RELEASE/jar/42824202b65f30da00e86d2980d700059ee900fc/spring-context-support-3.1.4.RELEASE.jar" />
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.springframework/spring-web/3.1.4.RELEASE/jar/ccc9a401f6e146fe80108db9fbfde894cb63d6a0/spring-web-3.1.4.RELEASE.jar" />
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-26/filestore/ch.qos.logback/logback-core/1.0.13/jar/dc6e6ce937347bd4d990fc89f4ceb469db53e45e/logback-core-1.0.13.jar" />
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.slf4j/slf4j-api/1.7.5/jar/6b262da268f8ad9eff941b25503a9198f0a0ac93/slf4j-api-1.7.5.jar" />
+            <element id="file-copy" path="$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.slf4j/jcl-over-slf4j/1.7.5/jar/cd5970bd13fa85f7bed41ca606d6daf7cbf1365/jcl-over-slf4j-1.7.5.jar" />
           </element>
         </element>
       </root>
