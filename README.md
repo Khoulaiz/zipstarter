@@ -67,7 +67,8 @@ work fine if MANIFEST.MF is not the first file in the JAR, but be aware of this 
 
 MANIFEST.MF content
 -------------------
-please see the example projects for real life examples. The manifest should have (among optional others entries) this:
+please see the example projects for real life examples. The manifest should have (among optional other entries) the 
+following content:
 
     Main-Class: boot.ZipStarter
     ZipStarter-Class-Path: <1st directory> <2nd directoyr> <3rd jar-file>
